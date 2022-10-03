@@ -8,9 +8,7 @@ const Engineer = require('./lib/engineer')
 
 const generateHtml = require('./src/generateHtml')
 
-let manager = []
-let intern = []
-let engineer = []
+let employees = []
 
 const nextQuestion = {
     type:'list',
@@ -91,7 +89,7 @@ const engineerQuestions = [
 function writeToFile(fileName, data) {
 
     fs.writeFile(fileName, data, (err) =>
-        err ? console.log(err) : console.log('Successfully created autoreadme.md!'));
+        err ? console.log(err) : console.log('Successfully created autoindex.html!'));
 
 }
 
@@ -100,8 +98,8 @@ function promptManagerQuestions() {
         .prompt(managerQuestions)
         .then((answers) => {
 
-            let managerDetail = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
-            manager.push(managerDetail)
+            const managerDetail = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+            employees.push(managerDetail)
 
             promptNextQuestion()
         })
@@ -116,12 +114,9 @@ function promptNextQuestion() {
             } else if (answers.next === 'Engineer') {
                 promptEngineerQuestion();
             } else {
-                const generate = generateHtml(manager, intern, engineer)
+                const generate = generateHtml(employees)
 
                 writeToFile('./dist/autoindex.html', generate)
-                // console.log(manager)
-                // console.log(intern)
-                // console.log(engineer)
             }
         })
 }
@@ -131,8 +126,8 @@ function promptInternQuestion() {
         .prompt(internQuestions)
         .then((answers) => {
 
-            let internDetail = new Intern(answers.name, answers.id, answers.email, answers.school)
-            intern.push(internDetail)
+            const internDetail = new Intern(answers.name, answers.id, answers.email, answers.school)
+            employees.push(internDetail)
 
             promptNextQuestion();
         })
@@ -143,8 +138,8 @@ function promptEngineerQuestion() {
         .prompt(engineerQuestions)
         .then((answers) => {
 
-            let engineerDetail = new Engineer(answers.name, answers.id, answers.email, answers.gitHub)
-            engineer.push(engineerDetail)
+            const engineerDetail = new Engineer(answers.name, answers.id, answers.email, answers.gitHub)
+            employees.push(engineerDetail)
 
             promptNextQuestion()
         })
