@@ -6,6 +6,8 @@ const Manager = require('./lib/manager')
 const Intern = require('./lib/intern')
 const Engineer = require('./lib/engineer')
 
+
+
 const managerQuestions = [
     {
         type: 'input',
@@ -75,16 +77,7 @@ const engineerQuestions = [
     },
 ];
 
-
-function writeToFile(fileName, data) {
-
-    fs.writeFile(fileName, data, (err) =>
-        err ? console.log(err) : console.log('Successfully created index.html!'));
-
-}
-
-
-function init() {
+function managerDetails() {
     inquirer
         .prompt(managerQuestions)
         .then((answers) => {
@@ -95,3 +88,4 @@ function init() {
 
         })
 }
+
