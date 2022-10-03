@@ -111,15 +111,17 @@ function promptNextQuestion() {
     inquirer
         .prompt(nextQuestion)
         .then((answers) => {
-            if(answers === 'Intern') {
+            if(answers.next === 'Intern') {
                 promptInternQuestion();
-            } else if (answers === 'Engineer') {
+            } else if (answers.next === 'Engineer') {
                 promptEngineerQuestion();
             } else {
-                // generateHtml(manager, intern, engineer)
-                console.log(manager)
-                console.log(intern)
-                console.log(engineer)
+                const generate = generateHtml(manager, intern, engineer)
+
+                writeToFile('./dist/autoindex.html', generate)
+                // console.log(manager)
+                // console.log(intern)
+                // console.log(engineer)
             }
         })
 }
@@ -144,7 +146,7 @@ function promptEngineerQuestion() {
             let engineerDetail = new Engineer(answers.name, answers.id, answers.email, answers.gitHub)
             engineer.push(engineerDetail)
 
-            promptNextQuestion
+            promptNextQuestion()
         })
 }
 
