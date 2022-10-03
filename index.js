@@ -12,6 +12,13 @@ let manager = []
 let intern = []
 let engineer = []
 
+const nextQuestion = {
+    type:'list',
+    name:'next',
+    message:'Which employee do you want to add next?',
+    choices:['Intern', 'Engineer', "Finish adding employees"]
+}
+
 const managerQuestions = [
     {
         type: 'input',
@@ -76,7 +83,7 @@ const engineerQuestions = [
     },
     {
         type: 'input',
-        name: 'school',
+        name: 'gitHub',
         message: "What is their GitHub username?",
     },
 ];
@@ -88,15 +95,57 @@ function writeToFile(fileName, data) {
 
 }
 
-function init() {
+function promptManagerQuestions() {
     inquirer
         .prompt(managerQuestions)
         .then((answers) => {
 
-            managerDetail = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
-            manager.push()
+            let managerDetail = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+            manager.push(managerDetail)
 
+            promptNextQuestion()
         })
 }
 
-init()
+function promptNextQuestion() {
+    inquirer
+        .prompt(nextQuestion)
+        .then((answers) => {
+            if(answers === 'Intern') {
+                promptInternQuestion();
+            } else if (answers === 'Engineer') {
+                promptEngineerQuestion();
+            } else {
+                // generateHtml(manager, intern, engineer)
+                console.log(manager)
+                console.log(intern)
+                console.log(engineer)
+            }
+        })
+}
+
+function promptInternQuestion() {
+    inquirer  
+        .prompt(internQuestions)
+        .then((answers) => {
+
+            let internDetail = new Intern(answers.name, answers.id, answers.email, answers.school)
+            intern.push(internDetail)
+
+            promptNextQuestion();
+        })
+}
+
+function promptEngineerQuestion() {
+    inquirer
+        .prompt(engineerQuestions)
+        .then((answers) => {
+
+            let engineerDetail = new Engineer(answers.name, answers.id, answers.email, answers.gitHub)
+            engineer.push(engineerDetail)
+
+            promptNextQuestion
+        })
+}
+
+promptManagerQuestions()
