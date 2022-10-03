@@ -6,7 +6,11 @@ const Manager = require('./lib/manager')
 const Intern = require('./lib/intern')
 const Engineer = require('./lib/engineer')
 
+const generateHtml = require('./src/generateHtml')
 
+let manager = []
+let intern = []
+let engineer = []
 
 const managerQuestions = [
     {
@@ -77,15 +81,22 @@ const engineerQuestions = [
     },
 ];
 
-function managerDetails() {
+function writeToFile(fileName, data) {
+
+    fs.writeFile(fileName, data, (err) =>
+        err ? console.log(err) : console.log('Successfully created autoreadme.md!'));
+
+}
+
+function init() {
     inquirer
         .prompt(managerQuestions)
         .then((answers) => {
 
-            const html = generateHtml(answers)
-
-            writeToFile('./dist/index.html', html);
+            managerDetail = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+            manager.push()
 
         })
 }
 
+init()
