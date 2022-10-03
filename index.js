@@ -1,56 +1,80 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-// const generateMarkdown = require('./lib/generateMarkdown')
 
-const questions = [
+const Employee = require('./lib/employee')
+const Manager = require('./lib/manager')
+const Intern = require('./lib/intern')
+const Engineer = require('./lib/engineer')
+
+const managerQuestions = [
     {
         type: 'input',
-        name: 'username',
-        message: 'What is your GitHub username?',
+        name: 'name',
+        message: "What is the manager's full name?",
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is their employee id?',
     },
     {
         type: 'input',
         name: 'email',
-        message: 'What is your email address?',
+        message: "What is their email address?",
     },
     {
         type: 'input',
-        name: 'project',
-        message: "What is your project's name?",
+        name: 'officeNumber',
+        message: "What is their work phone number?",
     },
-    {
-        type: 'input',
-        name: 'description',
-        message: 'Please write a short description of your project',
-    },
-    {
-        type: 'list',
-        name: 'license',
-        message: 'What kind of license should your project have',
-        choices: ['MIT License', 'ISC License', ' ']
-    },
-    {
-        type: 'input',
-        name: 'dependencies',
-        message: 'What command should be run to install dependencies?',
-    },
-    {
-        type: 'input',
-        name: 'runCommand',
-        message: 'What command should be run to run tests?',
-    },
-    {
-        type: 'input',
-        name: 'usage',
-        message: 'What does the user need to know about using the repo?',
-    },
-    {
-        type: 'input',
-        name: 'contribution',
-        message: 'What does the user need to know about contributing to the repo?',
-    }
-
 ];
+
+const internQuestions = [
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is the intern's full name?",
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is their employee id?',
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: "What is their email address?",
+    },
+    {
+        type: 'input',
+        name: 'school',
+        message: "What is the name of their current school?",
+    },
+];
+
+const engineerQuestions = [
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is the engineer's full name?",
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'What is their employee id?',
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: "What is their email address?",
+    },
+    {
+        type: 'input',
+        name: 'school',
+        message: "What is their GitHub username?",
+    },
+];
+
 
 function writeToFile(fileName, data) {
 
@@ -62,7 +86,7 @@ function writeToFile(fileName, data) {
 
 function init() {
     inquirer
-        .prompt(questions)
+        .prompt(managerQuestions)
         .then((answers) => {
 
             const html = generateHtml(answers)
