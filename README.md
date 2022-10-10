@@ -28,6 +28,10 @@ Once you run the app using the command above, you will be prompted with question
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mecuboi/employee-card-generator/blob/main/LICENSE)
 Click the icon to read the license
 
+## Video Walkthrough
+
+https://drive.google.com/file/d/17swE6GxKWQfPil_zVsQYH5WcM8FFjXhI/view
+
 ## Questions
 
 Reach out to me using the links below:
